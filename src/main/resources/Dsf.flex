@@ -5,6 +5,7 @@ import com.intellij.psi.tree.IElementType;
 import static com.example.dsfintellij.DsfTokenTypes.*;
 
 %%
+
 %public
 %class DsfLexer
 %implements com.intellij.lexer.FlexLexer
@@ -27,7 +28,7 @@ DQSTR       = \"([^\"\\\\]|\\\\.)*\"
 SQSTR       = \'([^\'\\\\]|\\\\.)*\'
 DSF_DIR     = :[A-Z][A-Z0-9_]*
 DP_CMD      = \\.dp[a-z][a-z0-9_]*
-DOT_CMD     = \\.(?!dp)[a-z][a-z0-9_]*
+DOT_CMD     = \\.[a-z][a-z0-9_]*
 
 %%
 
@@ -36,10 +37,7 @@ DOT_CMD     = \\.(?!dp)[a-z][a-z0-9_]*
    ========================= */
 
 <YYINITIAL>{
-  "<!--"                { yybegin(YYINITIAL); return COMMENT; }  // consume in one go below
-}
 
-<YYINITIAL>{
   "<!--" ([^-]|-+[^-])* "-->"  { return COMMENT; }
 
   "<!DOCTYPE" [^>]* ">"        { return DOCTYPE; }
@@ -48,25 +46,35 @@ DOT_CMD     = \\.(?!dp)[a-z][a-z0-9_]*
 
   "<\\?(?!xml)" [^?]* "\\?>"   { return PI; }
 
-  "<!\\[CDATA\\["              { yybegin(IN_CDATA); return LT; }  // style like punctuation begin
-  // Tags
-  "<" "/"                      { return LT; }                     // '<' part; '/' will be separate rule below if needed
+  "<!\\[CDATA\\["              { yybegin(IN_CDATA); return LT; }
+
+  // Tag starts
+  "<" "/"                      { return LT; }
   "<"                          { yybegin(IN_TAG); return LT; }
 
-  // DSF directives (block): :NAME ... .
+  // DSF directives: :NAME ... .
   {DSF_DIR}                    { yybegin(IN_DSF); return DSF_DIRECTIVE; }
 
-  // Inline commands: .dp... OR .foo...
+  // Inline commands (two kinds)
   {DP_CMD}                     { yybegin(IN_INLINE); return DSF_INLINE_CMD; }
-  {DOT_CMD}                    { yybegin(IN_INLINE); return DSF_INLINE_CMD; }
+  {DOT_CMD}                    {
+                                  // emulate negative lookahead (not starting with ".dp")
+                                  if (yytext().length() >= 3 &&
+                                      yytext().charAt(1) == 'd' &&
+                                      yytext().charAt(2) == 'p') {
+                                      // this is actually .dp..., treat like DP_CMD branch
+                                      yybegin(IN_INLINE); return DSF_INLINE_CMD;
+                                  } else {
+                                      yybegin(IN_INLINE); return DSF_INLINE_CMD;
+                                  }
+                               }
 
-  // plain slash in text
   "/"                          { return SLASH; }
   "="                          { return EQ; }
   {WS}                         { return WHITE_SPACE; }
   {NL}                         { return WHITE_SPACE; }
 
-  .                            { return DsfTokenTypes.WHITE_SPACE; } // treat other text as plain
+  .                            { return WHITE_SPACE; }
 }
 
 /* ====== IN_TAG ====== */
@@ -79,17 +87,25 @@ DOT_CMD     = \\.(?!dp)[a-z][a-z0-9_]*
   {DQSTR}                      { return STRING; }
   {SQSTR}                      { return STRING; }
   {NL}                         { return WHITE_SPACE; }
-  .                            { return DsfTokenTypes.WHITE_SPACE; }
+  .                            { return WHITE_SPACE; }
 }
 
 /* ====== IN_CDATA ====== */
 <IN_CDATA>{
-  "]]>"                        { yybegin(YYINITIAL); return GT; }   // treat like end '>'
+  "]]>"                        { yybegin(YYINITIAL); return GT; }
   {DSF_DIR}                    { yybegin(IN_DSF); return DSF_DIRECTIVE; }
   {DP_CMD}                     { yybegin(IN_INLINE); return DSF_INLINE_CMD; }
-  {DOT_CMD}                    { yybegin(IN_INLINE); return DSF_INLINE_CMD; }
+  {DOT_CMD}                    {
+                                  if (yytext().length() >= 3 &&
+                                      yytext().charAt(1) == 'd' &&
+                                      yytext().charAt(2) == 'p') {
+                                      yybegin(IN_INLINE); return DSF_INLINE_CMD;
+                                  } else {
+                                      yybegin(IN_INLINE); return DSF_INLINE_CMD;
+                                  }
+                               }
   {NL}                         { return WHITE_SPACE; }
-  [^]                          { return CDATA_TEXT; } // any char including > etc.
+  [^]                          { return CDATA_TEXT; }
 }
 
 /* ====== IN_DSF (directive body) ====== */
