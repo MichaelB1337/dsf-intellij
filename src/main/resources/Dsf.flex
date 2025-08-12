@@ -114,19 +114,24 @@ DOT_CMD  = \.[A-Za-z][A-Za-z0-9_]*
    IN_DSF (:DIRECTIVE … .)
    ========================= */
 <IN_DSF>{
-  {WS}      { return WHITE_SPACE; }
-  {UPNAME}  { return DSF_PARAM_NAME; }
-  "="       { return EQ; }
-  {DQSTR}   { return STRING; }
-  {SQSTR}   { return STRING; }
+  {WS}                           { return WHITE_SPACE; }
 
-  /* Single dot ends the directive */
-  "\."      { yybegin(YYINITIAL); return DSF_DOT; }
+  // 1) Strings FIRST so '.' inside quotes never terminates the directive
+  {DQSTR}                        { return STRING; }
+  {SQSTR}                        { return STRING; }
 
-  /* Unquoted directive value chunk */
-  [^.\s]+   { return DSF_UNQUOTED; }
+  // 2) Proper param name and '=' as in XML
+  {UPNAME}                       { return DSF_PARAM_NAME; }   // e.g. TABLEID, HALIGN
+  "="                            { return EQ; }
 
-  {NL}      { yybegin(YYINITIAL); return WHITE_SPACE; }
+  // 3) Unquoted chunk: NO dot, NO whitespace/newline, NO quotes, NO '='
+  [^\.=\ \t\r\n\'\"]+            { return DSF_UNQUOTED; }
+
+  // 4) A single dot ends the directive (after we've handled strings/unquoted)
+  "."                            { yybegin(YYINITIAL); return DSF_DOT; }
+
+  // 5) Safety: newline also ends the directive (rare, but keeps things sane)
+  {NL}                           { yybegin(YYINITIAL); return WHITE_SPACE; }
 }
 
 /* =========================
