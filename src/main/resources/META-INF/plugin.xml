@@ -1,6 +1,7 @@
 <idea-plugin>
-    <id>com.example.dsfintellij</id>
-    <name>DSF Syntax Highlighting</name>
+    <id>dev.michaelbergmann.dsfintellij</id>
+    <name>DSF Highlighter</name>
+    <vendor email="michael.15@gmx.de" url="https://github.com/MichaelB1337">Michael Bergmann</vendor>
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -9,16 +10,16 @@
                 name="DSF File"
                 extensions="dsf"
                 language="DSF"
-                implementationClass="com.example.dsfintellij.DsfFileType"/>
+                implementationClass="dev.michaelbergmann.dsfintellij.DsfFileType"/>
 
         <!-- Minimal parser definition to make DSF a real language in the PSI -->
         <lang.parserDefinition
                 language="DSF"
-                implementationClass="com.example.dsfintellij.DsfParserDefinition"/>
+                implementationClass="dev.michaelbergmann.dsfintellij.DsfParserDefinition"/>
 
         <!-- Syntax highlighter -->
         <lang.syntaxHighlighterFactory
                 language="DSF"
-                implementationClass="com.example.dsfintellij.DsfSyntaxHighlighterFactory"/>
+                implementationClass="dev.michaelbergmann.dsfintellij.DsfSyntaxHighlighterFactory"/>
     </extensions>
 </idea-plugin>

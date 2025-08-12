@@ -1,4 +1,4 @@
-package com.example.dsfintellij
+package dev.michaelbergmann.dsfintellij
 
 import com.intellij.openapi.util.IconLoader
 import javax.swing.Icon

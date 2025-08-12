@@ -1,5 +1,5 @@
 // DsfParserDefinition.kt
-package com.example.dsfintellij
+package dev.michaelbergmann.dsfintellij
 
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition

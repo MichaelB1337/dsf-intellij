@@ -2,10 +2,10 @@
 // source: Dsf.flex
 
 /* Dsf.flex — IntelliJ JFlex lexer for DSF (XML + DSF commands) */
-package com.example.dsfintellij;
+package dev.michaelbergmann.dsfintellij;
 
 import com.intellij.psi.tree.IElementType;
-import static com.example.dsfintellij.DsfTokenTypes.*;
+import static dev.michaelbergmann.dsfintellij.DsfTokenTypes.*;
 
 
 public class DsfLexer implements com.intellij.lexer.FlexLexer {

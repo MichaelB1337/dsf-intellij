@@ -1,5 +1,5 @@
 // DsfTokenTypes.kt
-package com.example.dsfintellij
+package dev.michaelbergmann.dsfintellij
 import com.intellij.psi.tree.IElementType
 
 

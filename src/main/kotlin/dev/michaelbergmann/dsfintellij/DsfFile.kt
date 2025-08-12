@@ -1,4 +1,4 @@
-package com.example.dsfintellij
+package dev.michaelbergmann.dsfintellij
 
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType

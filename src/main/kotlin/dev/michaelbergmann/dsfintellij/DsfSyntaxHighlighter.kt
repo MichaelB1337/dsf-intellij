@@ -1,4 +1,4 @@
-package com.example.dsfintellij
+package dev.michaelbergmann.dsfintellij
 
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
