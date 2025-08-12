@@ -46,6 +46,7 @@ bin/
 .kotlinsession/
 .kotlinsession/*
 .kotlinc/
+.kotlin
 
 # IntelliJ test runtime
 bundledModule-intelliJ-platform-test-runtime-*
