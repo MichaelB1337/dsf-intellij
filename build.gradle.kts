@@ -1,3 +1,5 @@
+import java.io.File
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
@@ -20,15 +22,28 @@ sourceSets {
     }
 }
 
+// --- Read plugin description from README.md ---
+fun readPluginDescriptionFromReadme(readmeFile: File): String {
+    val start = "<!-- Plugin description -->"
+    val end = "<!-- Plugin description end -->"
+    val lines = readmeFile.readLines()
+    val startIdx = lines.indexOfFirst { it.contains(start) }
+    val endIdx = lines.indexOfFirst { it.contains(end) }
+    require(startIdx != -1 && endIdx != -1 && startIdx < endIdx) {
+        "README.md must contain \"$start\" and \"$end\" markers"
+    }
+    return lines.subList(startIdx + 1, endIdx).joinToString("\n").trim()
+}
+
+val pluginDescription: Provider<String> = providers.provider {
+    readPluginDescriptionFromReadme(layout.projectDirectory.file("README.md").asFile)
+}
+
 // Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
     intellijPlatform {
         create("IC", "2025.1")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
-
-        // Add necessary plugin dependencies for compilation here, example:
-        // bundledPlugin("com.intellij.java")
     }
 }
 
@@ -38,9 +53,16 @@ intellijPlatform {
             sinceBuild = "251"
         }
 
+        description = pluginDescription
+
         changeNotes = """
-      Initial version
-    """.trimIndent()
+            Initial version
+            <ul>
+                <li>Syntax highlighting for .dsf</li>
+                <li>Directive and attribute coloring</li>
+                <li>Auto file association</li>
+            </ul>
+        """.trimIndent()
     }
 }
 
