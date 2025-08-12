@@ -2,36 +2,38 @@ package com.example.dsfintellij
 
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
+import com.intellij.openapi.editor.XmlHighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.IElementType
 
-class DsfSyntaxHighlighter : SyntaxHighlighterBase() {
+class DsfSyntaxHighlighter : com.intellij.openapi.fileTypes.SyntaxHighlighterBase() {
 
     override fun getHighlightingLexer(): Lexer = DsfLexerAdapter()
 
-    override fun getTokenHighlights(t: IElementType): Array<TextAttributesKey> {
-        fun k(name: String, base: TextAttributesKey) =
-            TextAttributesKey.createTextAttributesKey(name, base)
+    private fun key(name: String, base: TextAttributesKey) =
+        TextAttributesKey.createTextAttributesKey(name, base)
 
-        val TAG = k("DSF_TAG", DefaultLanguageHighlighterColors.MARKUP_TAG)
-        val ATTR = k("DSF_ATTR", DefaultLanguageHighlighterColors.MARKUP_ATTRIBUTE)
-        val STR = k("DSF_STRING", DefaultLanguageHighlighterColors.STRING)
-        val COMM = k("DSF_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT)
-        val META = k("DSF_META", DefaultLanguageHighlighterColors.METADATA)
-        val KW = k("DSF_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
-        val PUNC = k("DSF_PUNCT", DefaultLanguageHighlighterColors.OPERATION_SIGN)
-        val TEXT = k("DSF_TEXT", DefaultLanguageHighlighterColors.IDENTIFIER)
+    // Reuse XML palette so themes color it like real XML
+    private val TAG_NAME  = key("DSF_TAG_NAME",  XmlHighlighterColors.XML_TAG_NAME)
+    private val ATTR_NAME = key("DSF_ATTR_NAME", XmlHighlighterColors.XML_ATTRIBUTE_NAME)
+    private val STR       = key("DSF_STRING",    XmlHighlighterColors.XML_ATTRIBUTE_VALUE)
+    private val COMM      = key("DSF_COMMENT",   XmlHighlighterColors.XML_COMMENT)
+    private val PUNC      = key("DSF_PUNC",      XmlHighlighterColors.XML_TAG) // <, >, /, =
 
-        return when (t) {
-            DsfTokenTypes.TAG_NAME -> arrayOf(TAG)
-            DsfTokenTypes.ATTR_NAME, DsfTokenTypes.DSF_PARAM_NAME -> arrayOf(ATTR)
-            DsfTokenTypes.STRING, DsfTokenTypes.DSF_INLINE_VALUE, DsfTokenTypes.CDATA_TEXT -> arrayOf(STR)
-            DsfTokenTypes.COMMENT -> arrayOf(COMM)
-            DsfTokenTypes.DOCTYPE, DsfTokenTypes.XML_DECL, DsfTokenTypes.PI -> arrayOf(META)
-            DsfTokenTypes.DSF_DIRECTIVE, DsfTokenTypes.DSF_INLINE_CMD -> arrayOf(KW)
-            DsfTokenTypes.LT, DsfTokenTypes.GT, DsfTokenTypes.SLASH, DsfTokenTypes.EQ, DsfTokenTypes.DSF_DOT -> arrayOf(PUNC)
-            else -> arrayOf(TEXT)
-        }
+    // Fallback for anything else
+    private val TEXT      = key("DSF_TEXT", DefaultLanguageHighlighterColors.IDENTIFIER)
+
+    override fun getTokenHighlights(t: IElementType): Array<TextAttributesKey> = when (t) {
+        DsfTokenTypes.TAG_NAME    -> arrayOf(TAG_NAME)
+        DsfTokenTypes.ATTR_NAME   -> arrayOf(ATTR_NAME)
+        DsfTokenTypes.STRING      -> arrayOf(STR)
+        DsfTokenTypes.COMMENT     -> arrayOf(COMM)
+        DsfTokenTypes.LT,
+        DsfTokenTypes.GT,
+        DsfTokenTypes.SLASH,
+        DsfTokenTypes.EQ          -> arrayOf(PUNC)
+        DsfTokenTypes.WHITE_SPACE -> emptyArray()
+        else                      -> arrayOf(TEXT)
     }
 }

@@ -12,7 +12,7 @@
                 name="DSF File"
                 extensions="dsf"
                 language="DSF"
-                implementationClass="com.example.dsfintellij.DsFileType"/>
+                implementationClass="com.example.dsfintellij.DsfFileType"/>
         <lang.syntaxHighlighterFactory
                 language="DSF"
                 implementationClass="com.example.dsfintellij.DsfSyntaxHighlighterFactory"/>

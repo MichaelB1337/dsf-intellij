@@ -3,7 +3,7 @@ package com.example.dsfintellij
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-class DsFileType private constructor() : LanguageFileType(DsfLanguage) {
+class DsfFileType private constructor() : LanguageFileType(DsfLanguage) {
 
     override fun getName() = "DSF File"
     override fun getDescription() = "DSF input file"
@@ -11,6 +11,6 @@ class DsFileType private constructor() : LanguageFileType(DsfLanguage) {
     override fun getIcon(): Icon = DsfIcons.FILE
 
     companion object {
-        val INSTANCE = DsFileType()
+        val INSTANCE = DsfFileType()
     }
 }
