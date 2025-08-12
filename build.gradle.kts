@@ -14,6 +14,12 @@ repositories {
     }
 }
 
+sourceSets {
+    named("main") {
+        java.srcDirs("src/main/kotlin", "src/main/gen")
+    }
+}
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
