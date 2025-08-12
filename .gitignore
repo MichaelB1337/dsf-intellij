@@ -40,3 +40,15 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# IntelliJ / JetBrains session + build locks
+*.lock
+.kotlinsession/
+.kotlinsession/*
+.kotlinc/
+
+# IntelliJ test runtime
+bundledModule-intelliJ-platform-test-runtime-*
+
+# JFlex generated files
+*.jar   # like jflex-1.9.2.jar, unless you want to keep the tool in repo
