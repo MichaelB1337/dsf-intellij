@@ -27,29 +27,29 @@ class DsfSyntaxHighlighter : SyntaxHighlighterBase() {
     private val DSF_VALUE   = key("DSF_VALUE",   DefaultLanguageHighlighterColors.STRING)  // inline args, unquoted bits
 
     override fun getTokenHighlights(t: IElementType): Array<TextAttributesKey> = when (t) {
-        // XML bits
-        DsfTokenTypes.TAG_NAME                 -> arrayOf(TAG_NAME)
-        DsfTokenTypes.ATTR_NAME               -> arrayOf(ATTR_NAME)
-        DsfTokenTypes.STRING                  -> arrayOf(ATTR_VALUE)
-        DsfTokenTypes.COMMENT                 -> arrayOf(COMMENT)
+        // XML parts
+        DsfTokenTypes.TAG_NAME                  -> arrayOf(XmlHighlighterColors.XML_TAG_NAME)
+        DsfTokenTypes.ATTR_NAME, DsfTokenTypes.DSF_PARAM_NAME
+            -> arrayOf(XmlHighlighterColors.XML_ATTRIBUTE_NAME)
+        DsfTokenTypes.STRING                    -> arrayOf(XmlHighlighterColors.XML_ATTRIBUTE_VALUE)
         DsfTokenTypes.LT, DsfTokenTypes.GT,
-        DsfTokenTypes.SLASH, DsfTokenTypes.EQ -> arrayOf(PUNCT)
-        DsfTokenTypes.DOCTYPE,
-        DsfTokenTypes.XML_DECL,
-        DsfTokenTypes.PI                      -> arrayOf(META)
+        DsfTokenTypes.SLASH, DsfTokenTypes.EQ   -> arrayOf(XmlHighlighterColors.XML_TAG)
+        DsfTokenTypes.COMMENT                   -> arrayOf(XmlHighlighterColors.XML_COMMENT)
+        DsfTokenTypes.DOCTYPE, DsfTokenTypes.XML_DECL, DsfTokenTypes.PI
+            -> arrayOf(DefaultLanguageHighlighterColors.METADATA)
 
-        // CDATA content
-        DsfTokenTypes.CDATA_TEXT              -> arrayOf(ATTR_VALUE)
+        // DSF inside CDATA
+        DsfTokenTypes.DSF_DIRECTIVE,            // :DPT...
+        DsfTokenTypes.DSF_INLINE_CMD            // .dp..., .FOO
+            -> arrayOf(DefaultLanguageHighlighterColors.KEYWORD)
 
-        // DSF bits
-        DsfTokenTypes.DSF_DIRECTIVE,
-        DsfTokenTypes.DSF_INLINE_CMD          -> arrayOf(DSF_KEYWORD)
-        DsfTokenTypes.DSF_PARAM_NAME          -> arrayOf(ATTR_NAME)
-        DsfTokenTypes.DSF_UNQUOTED,
-        DsfTokenTypes.DSF_INLINE_VALUE        -> arrayOf(DSF_VALUE)
-        DsfTokenTypes.DSF_DOT                 -> arrayOf(PUNCT)
+        DsfTokenTypes.DSF_DOT                   -> arrayOf(DefaultLanguageHighlighterColors.KEYWORD)
+        DsfTokenTypes.DSF_INLINE_VALUE,
+        DsfTokenTypes.DSF_UNQUOTED              -> arrayOf(XmlHighlighterColors.XML_ATTRIBUTE_VALUE)
 
-        // everything else (including WHITE_SPACE)
-        else -> TextAttributesKey.EMPTY_ARRAY
+        // CDATA text that is not DSF
+        DsfTokenTypes.CDATA_TEXT                -> TextAttributesKey.EMPTY_ARRAY
+
+        else                                    -> TextAttributesKey.EMPTY_ARRAY
     }
 }

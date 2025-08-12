@@ -5,7 +5,7 @@
 package com.example.dsfintellij;
 
 import com.intellij.psi.tree.IElementType;
-import static com.example.dsfintellij.DsfTokenTypes.*;  // MUST contain all tokens referenced below
+import static com.example.dsfintellij.DsfTokenTypes.*;
 
 
 public class DsfLexer implements com.intellij.lexer.FlexLexer {
@@ -40,7 +40,8 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\37\u0100\1\u0200\267\u0100\10\u0300\u1020\u0100";
+    "\1\0\25\u0100\1\u0200\11\u0100\1\u0300\17\u0100\1\u0400\247\u0100"+
+    "\10\u0500\u1020\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -73,12 +74,13 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
     "\1\14\12\15\1\16\1\0\1\17\1\20\1\21\1\22"+
     "\1\0\1\23\1\24\1\25\1\26\1\27\11\24\1\30"+
     "\1\31\3\24\1\32\4\24\1\33\1\24\1\34\1\35"+
-    "\1\36\1\0\1\37\1\0\3\40\1\41\1\42\6\40"+
-    "\1\43\1\44\2\40\1\45\2\40\1\46\4\40\1\47"+
-    "\2\40\12\0\1\3\u01a2\0\2\3\326\0\u0100\3";
+    "\1\36\1\0\1\37\1\0\13\40\1\41\1\42\12\40"+
+    "\1\43\2\40\12\0\1\3\32\0\1\44\u01df\0\1\44"+
+    "\177\0\13\44\35\0\2\3\5\0\1\44\57\0\1\44"+
+    "\240\0\1\44\377\0\u0100\45";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[1024];
+    int [] result = new int[1536];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -102,15 +104,14 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\6\0\1\1\3\2\1\1\1\3\1\1\1\4\2\1"+
-    "\1\5\1\6\1\7\1\10\1\11\4\12\1\13\1\2"+
-    "\2\13\1\7\1\14\1\1\1\15\1\2\2\16\1\17"+
-    "\1\0\1\3\3\0\1\20\4\0\1\20\1\21\13\0"+
-    "\1\22\6\0\1\22\6\0\1\23\13\0\1\24\1\25"+
-    "\2\0\1\26\2\0\1\27";
+    "\6\0\1\1\3\2\2\1\1\3\2\1\1\4\1\5"+
+    "\1\6\1\7\1\10\4\11\1\12\2\13\2\12\1\14"+
+    "\1\5\1\15\1\16\1\2\1\17\1\20\1\0\1\3"+
+    "\2\0\1\21\4\0\1\21\2\12\25\0\1\22\3\0"+
+    "\1\23\4\0\1\24\1\0\1\25\1\0\1\26";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[94];
+    int [] result = new int[83];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -135,21 +136,20 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\50\0\120\0\170\0\240\0\310\0\360\0\u0118"+
-    "\0\360\0\u0140\0\u0168\0\u0190\0\u01b8\0\u01e0\0\u0208\0\u0230"+
-    "\0\360\0\u0258\0\360\0\360\0\u0280\0\360\0\u0168\0\u01b8"+
-    "\0\u02a8\0\u02d0\0\u02f8\0\u0320\0\u0348\0\u02d0\0\u0370\0\u0398"+
-    "\0\u03c0\0\u03e8\0\360\0\u0410\0\u0438\0\u0460\0\360\0\u0488"+
-    "\0\u04b0\0\u0208\0\360\0\u04d8\0\u0230\0\u0500\0\u0528\0\u02d0"+
-    "\0\360\0\u0550\0\u0578\0\u05a0\0\u05c8\0\u05f0\0\u0618\0\u0640"+
-    "\0\u0668\0\u0690\0\u06b8\0\u06e0\0\u05f0\0\u0708\0\u0730\0\u0758"+
-    "\0\u0780\0\u07a8\0\u07d0\0\u07f8\0\u0820\0\u0848\0\u0870\0\u0898"+
-    "\0\u08c0\0\u08e8\0\u0640\0\u0910\0\u0938\0\u0960\0\u0988\0\u09b0"+
-    "\0\u09d8\0\u0a00\0\u0a28\0\u0a50\0\u0a78\0\u0aa0\0\360\0\360"+
-    "\0\u0ac8\0\u0af0\0\360\0\u0b18\0\u0b40\0\360";
+    "\0\0\0\46\0\114\0\162\0\230\0\276\0\344\0\u010a"+
+    "\0\344\0\u0130\0\u0156\0\u017c\0\u01a2\0\u01c8\0\u01ee\0\344"+
+    "\0\344\0\344\0\u0214\0\u023a\0\344\0\u0156\0\u017c\0\u0260"+
+    "\0\u0286\0\344\0\u02ac\0\u02d2\0\u02f8\0\344\0\u0286\0\u031e"+
+    "\0\u0344\0\u036a\0\u0390\0\u03b6\0\u03dc\0\344\0\u0402\0\u01c8"+
+    "\0\344\0\u0428\0\u01ee\0\u044e\0\u0474\0\u0286\0\u049a\0\u04c0"+
+    "\0\u04e6\0\u050c\0\u0532\0\u0558\0\u057e\0\u05a4\0\u05ca\0\u05f0"+
+    "\0\u0616\0\u063c\0\u0662\0\u0688\0\u06ae\0\u06d4\0\u06fa\0\u0720"+
+    "\0\u0746\0\u076c\0\u0792\0\u07b8\0\u07de\0\u05a4\0\u0804\0\u082a"+
+    "\0\u0850\0\344\0\u0876\0\u089c\0\u08c2\0\u08e8\0\344\0\u090e"+
+    "\0\344\0\u0934\0\344";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[94];
+    int [] result = new int[83];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -172,51 +172,47 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\7\1\10\1\11\1\7\1\12\11\7\1\13\1\14"+
-    "\15\7\1\15\13\7\1\16\1\11\1\7\1\12\1\7"+
-    "\1\17\1\20\4\7\1\21\1\7\1\22\1\7\1\23"+
-    "\1\24\1\7\11\22\3\7\11\22\1\7\1\10\1\11"+
-    "\1\7\1\12\1\7\1\17\1\20\4\7\1\21\1\7"+
-    "\1\25\1\7\1\23\1\24\1\7\11\25\3\7\11\25"+
-    "\2\26\1\11\1\26\1\12\11\26\1\27\16\26\1\30"+
-    "\1\31\11\26\1\32\1\33\4\32\1\34\1\35\3\32"+
-    "\1\7\4\32\1\36\2\32\11\37\1\32\1\40\10\32"+
-    "\1\7\1\32\1\41\1\42\1\43\1\41\1\44\43\41"+
-    "\51\0\1\10\50\0\1\11\70\0\11\45\21\0\1\46"+
-    "\6\0\1\47\20\0\1\50\12\0\2\51\3\0\43\51"+
-    "\1\0\1\16\46\0\6\52\1\53\26\52\1\54\12\52"+
-    "\7\55\1\53\25\55\1\56\12\55\12\0\2\22\1\0"+
-    "\2\22\4\0\11\22\3\0\11\22\12\0\2\25\1\0"+
-    "\2\25\4\0\11\25\3\0\11\25\36\0\1\57\11\0"+
-    "\13\32\1\0\21\32\1\0\10\32\1\0\2\32\1\33"+
-    "\11\32\1\0\21\32\1\0\10\32\1\0\1\32\6\34"+
-    "\1\60\4\34\1\52\21\34\1\54\10\34\1\52\1\34"+
-    "\7\35\1\60\3\35\1\55\21\35\1\56\10\35\1\55"+
-    "\1\35\13\32\1\0\1\32\1\37\5\32\11\37\1\32"+
-    "\1\0\1\32\1\37\6\32\1\0\1\32\13\0\1\61"+
-    "\34\0\2\41\1\0\1\41\1\0\44\41\1\42\1\0"+
-    "\1\41\1\0\43\41\2\0\1\43\62\0\1\45\5\0"+
-    "\11\45\3\0\1\45\22\0\1\62\13\0\1\63\6\0"+
-    "\1\64\34\0\1\65\65\0\1\66\1\67\6\66\2\52"+
-    "\3\0\43\52\2\55\3\0\43\55\21\0\1\24\40\0"+
-    "\1\70\65\0\1\71\53\0\1\72\23\0\1\73\36\0"+
-    "\1\74\15\0\1\66\21\0\3\66\1\75\5\66\15\0"+
-    "\1\66\21\0\3\66\1\75\2\66\1\76\2\66\12\70"+
-    "\1\77\35\70\25\0\1\100\47\0\1\101\44\0\1\102"+
-    "\71\0\1\103\20\0\1\66\21\0\1\66\10\104\12\70"+
-    "\1\105\35\70\32\0\1\106\43\0\1\107\26\0\1\110"+
-    "\105\0\1\111\21\0\1\104\21\0\11\104\12\70\1\112"+
-    "\6\70\1\113\26\70\33\0\1\114\37\0\1\115\73\0"+
-    "\1\116\22\111\1\0\12\111\1\117\12\111\12\70\1\112"+
-    "\35\70\31\0\1\120\50\0\1\121\61\0\1\122\3\0"+
-    "\22\111\1\123\12\111\1\117\12\111\27\0\1\124\43\0"+
-    "\1\125\67\0\1\126\25\0\1\127\26\0\21\124\1\130"+
-    "\26\124\35\0\1\131\23\0\1\132\72\0\1\133\13\0"+
-    "\22\132\1\0\12\132\1\134\34\132\1\135\12\132\1\134"+
-    "\12\132\21\0\1\136\26\0";
+    "\1\7\1\10\1\11\1\7\1\12\6\7\1\13\2\7"+
+    "\1\14\1\15\27\7\1\10\1\11\1\7\1\12\1\7"+
+    "\1\16\1\17\4\7\1\20\3\7\1\21\1\22\1\7"+
+    "\11\23\3\7\5\23\3\7\1\10\1\11\1\7\1\12"+
+    "\1\7\1\16\1\17\4\7\1\20\3\7\1\21\1\22"+
+    "\1\7\11\24\3\7\5\24\2\7\2\25\1\11\1\25"+
+    "\1\12\6\25\1\26\2\25\1\27\17\25\1\30\7\25"+
+    "\1\31\1\10\1\32\1\7\1\33\1\31\1\34\1\35"+
+    "\3\31\1\36\4\31\1\37\2\31\11\40\10\31\1\7"+
+    "\1\31\1\41\1\42\1\32\1\41\1\33\41\41\47\0"+
+    "\1\10\46\0\1\11\66\0\11\43\4\0\4\43\25\0"+
+    "\11\44\17\0\1\45\6\0\1\46\5\0\1\47\23\0"+
+    "\6\50\1\51\26\50\1\52\10\50\7\53\1\51\25\53"+
+    "\1\54\10\53\12\0\2\23\1\0\1\23\5\0\11\23"+
+    "\3\0\5\23\14\0\2\24\1\0\1\24\5\0\11\24"+
+    "\3\0\5\24\40\0\1\55\7\0\1\31\4\0\6\31"+
+    "\1\0\30\31\1\0\1\31\2\0\1\32\43\0\1\34"+
+    "\4\50\1\34\1\56\4\34\1\50\21\34\1\57\6\34"+
+    "\1\50\1\34\1\35\4\53\2\35\1\56\3\35\1\53"+
+    "\21\35\1\60\6\35\1\53\1\35\1\31\4\0\6\31"+
+    "\1\0\1\31\1\40\5\31\11\40\3\31\1\40\4\31"+
+    "\1\0\1\31\2\41\1\0\1\41\1\0\42\41\1\42"+
+    "\1\0\1\41\1\0\41\41\15\0\1\43\5\0\11\43"+
+    "\3\0\5\43\17\0\1\44\5\0\11\44\3\0\1\44"+
+    "\20\0\1\61\13\0\1\62\5\0\1\63\21\0\1\64"+
+    "\32\0\1\65\2\0\2\50\3\0\40\50\1\0\2\53"+
+    "\3\0\40\53\22\0\1\22\24\0\1\34\1\50\3\0"+
+    "\6\34\1\50\30\34\1\50\1\31\1\35\1\53\3\0"+
+    "\6\35\1\53\30\35\1\53\1\31\12\0\1\66\63\0"+
+    "\1\67\42\0\1\70\42\0\1\71\65\0\1\72\3\0"+
+    "\12\66\1\73\33\66\25\0\1\74\46\0\1\75\24\0"+
+    "\1\76\101\0\1\77\4\0\12\66\1\100\33\66\32\0"+
+    "\1\101\36\0\1\102\65\0\1\103\2\0\22\77\1\104"+
+    "\23\77\12\66\1\105\6\66\1\106\24\66\33\0\1\107"+
+    "\44\0\1\110\55\0\1\111\24\0\1\112\24\0\12\66"+
+    "\1\105\33\66\31\0\1\113\37\0\1\114\63\0\1\115"+
+    "\33\0\1\116\52\0\1\117\22\0\1\120\34\0\21\116"+
+    "\1\121\24\116\22\120\1\122\23\120\21\0\1\123\24\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[2920];
+    int [] result = new int[2394];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -254,13 +250,13 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\6\0\1\11\1\1\1\11\7\1\1\11\1\1\2\11"+
-    "\1\1\1\11\14\1\1\11\2\1\1\0\1\11\3\0"+
-    "\1\11\4\0\1\1\1\11\13\0\1\1\6\0\1\1"+
-    "\6\0\1\1\13\0\2\11\2\0\1\11\2\0\1\11";
+    "\6\0\1\11\1\1\1\11\6\1\3\11\2\1\1\11"+
+    "\4\1\1\11\3\1\1\11\6\1\1\0\1\11\2\0"+
+    "\1\11\4\0\3\1\25\0\1\1\3\0\1\11\4\0"+
+    "\1\11\1\0\1\11\1\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[94];
+    int [] result = new int[83];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -628,117 +624,112 @@ public class DsfLexer implements com.intellij.lexer.FlexLexer {
             { return BAD_CHAR;
             }
           // fall through
-          case 24: break;
+          case 23: break;
           case 2:
             { return WHITE_SPACE;
             }
           // fall through
-          case 25: break;
+          case 24: break;
           case 3:
             { yybegin(IN_TAG_NAME); return LT;
             }
           // fall through
-          case 26: break;
+          case 25: break;
           case 4:
-            { /* ignore / let formatter color space */ return WHITE_SPACE;
-            }
-          // fall through
-          case 27: break;
-          case 5:
             { return SLASH;
             }
           // fall through
-          case 28: break;
+          case 26: break;
+          case 5:
+            { return EQ;
+            }
+          // fall through
+          case 27: break;
           case 6:
+            { yybegin(YYINITIAL); return GT;
+            }
+          // fall through
+          case 28: break;
+          case 7:
             { yybegin(IN_TAG); return TAG_NAME;
             }
           // fall through
           case 29: break;
-          case 7:
-            { return EQ;
-            }
-          // fall through
-          case 30: break;
           case 8:
-            { yybegin(YYINITIAL); return GT;
-            }
-          // fall through
-          case 31: break;
-          case 9:
             { return ATTR_NAME;
             }
           // fall through
-          case 32: break;
-          case 10:
+          case 30: break;
+          case 9:
             { return CDATA_TEXT;
             }
           // fall through
-          case 33: break;
-          case 11:
+          case 31: break;
+          case 10:
             { return DSF_UNQUOTED;
             }
           // fall through
-          case 34: break;
+          case 32: break;
+          case 11:
+            { yybegin(YYINITIAL); return WHITE_SPACE;
+            }
+          // fall through
+          case 33: break;
           case 12:
+            { yybegin(YYINITIAL); return DSF_DOT;
+            }
+          // fall through
+          case 34: break;
+          case 13:
             { return DSF_PARAM_NAME;
             }
           // fall through
           case 35: break;
-          case 13:
+          case 14:
             { yybegin(YYINITIAL); return DSF_INLINE_VALUE;
             }
           // fall through
           case 36: break;
-          case 14:
-            { yybegin(YYINITIAL); return WHITE_SPACE;
+          case 15:
+            { yybegin(IN_INLINE); return DSF_INLINE_CMD;
             }
           // fall through
           case 37: break;
-          case 15:
-            { yybegin(IN_DSF); return DSF_DIRECTIVE;
+          case 16:
+            { yybegin(IN_DSF);    return DSF_DIRECTIVE;
             }
           // fall through
           case 38: break;
-          case 16:
+          case 17:
             { return STRING;
             }
           // fall through
           case 39: break;
-          case 17:
-            { yybegin(YYINITIAL); return DSF_DOT;
-            }
-          // fall through
-          case 40: break;
           case 18:
-            { yybegin(IN_INLINE); return DSF_INLINE_CMD;
-            }
-          // fall through
-          case 41: break;
-          case 19:
             { return COMMENT;
             }
           // fall through
-          case 42: break;
-          case 20:
+          case 40: break;
+          case 19:
             { return XML_DECL;
             }
           // fall through
-          case 43: break;
+          case 41: break;
+          case 20:
+            { yybegin(IN_CDATA); return LT;
+            }
+          // fall through
+          case 42: break;
           case 21:
             { return DOCTYPE;
             }
           // fall through
-          case 44: break;
+          case 43: break;
           case 22:
-            { yybegin(IN_CDATA); return LT;
-            }
-          // fall through
-          case 45: break;
-          case 23:
             { return PI;
             }
           // fall through
-          case 46: break;
+          case 44: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

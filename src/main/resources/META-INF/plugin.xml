@@ -1,18 +1,22 @@
 <idea-plugin>
     <id>com.example.dsfintellij</id>
     <name>DSF Syntax Highlighting</name>
-    <vendor email="you@example.com" url="https://github.com/you/dsf-intellij">Your Name</vendor>
-
-    <description>Syntax highlighting for DSF files (XML-ish with DSF commands).</description>
-
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <!-- File type -->
         <fileType
                 name="DSF File"
                 extensions="dsf"
                 language="DSF"
                 implementationClass="com.example.dsfintellij.DsfFileType"/>
+
+        <!-- Minimal parser definition to make DSF a real language in the PSI -->
+        <lang.parserDefinition
+                language="DSF"
+                implementationClass="com.example.dsfintellij.DsfParserDefinition"/>
+
+        <!-- Syntax highlighter -->
         <lang.syntaxHighlighterFactory
                 language="DSF"
                 implementationClass="com.example.dsfintellij.DsfSyntaxHighlighterFactory"/>
