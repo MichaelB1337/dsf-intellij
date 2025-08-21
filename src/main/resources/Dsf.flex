@@ -24,14 +24,14 @@ import static dev.michaelbergmann.dsfintellij.DsfTokenTypes.*;
 
 /* ---------- Common macros ---------- */
 NAME     = [A-Za-z_][A-Za-z0-9_\-\.]*
-UPNAME   = [A-Z][A-Z0-9_]*
+UPNAME   = [A-Za-z][A-Za-z0-9_]*
 WS       = [ \t]+
 NL       = (\r\n|\r|\n)
 DQSTR    = \"([^\"\\]|\\.)*\"
 SQSTR    = \'([^\'\\]|\\.)*\'
 
 /* DSF macros */
-DSF_DIR  = :[A-Z][A-Z0-9_]*
+DSF_DIR = :[A-Za-z][A-Za-z0-9_]*
 DP_CMD   = \.dp[a-z][a-z0-9_]*
 DOT_CMD  = \.[A-Za-z][A-Za-z0-9_]*
 

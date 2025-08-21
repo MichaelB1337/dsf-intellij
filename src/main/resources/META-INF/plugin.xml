@@ -21,5 +21,8 @@
         <lang.syntaxHighlighterFactory
                 language="DSF"
                 implementationClass="dev.michaelbergmann.dsfintellij.DsfSyntaxHighlighterFactory"/>
+        <lang.foldingBuilder
+                language="DSF"
+                implementationClass="dev.michaelbergmann.dsfintellij.DsfFoldingBuilder"/>
     </extensions>
 </idea-plugin>
